@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'clientprofile',
+    'agentprofile',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

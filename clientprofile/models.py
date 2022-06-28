@@ -1,5 +1,3 @@
-from secrets import choice
-from sre_constants import MAX_REPEAT
 from django.db import models
 from django.core.validators import RegexValidator
 # Create your models here.
