@@ -3,8 +3,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.hashers import make_password
 
-# Create your models here.
-
 class UserProfileManager(BaseUserManager):
     def create_user(self, email, password=None):
         if not email:
