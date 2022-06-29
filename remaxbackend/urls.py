@@ -21,5 +21,5 @@ import clientprofile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('clientprofile.urls', namespace='api'))
+    path('api/', include('agentprofile.urls', namespace='api'))
 ]
