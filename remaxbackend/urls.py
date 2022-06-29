@@ -17,9 +17,13 @@ from http import client
 from django.contrib import admin
 from django.urls import path, include
 
-import clientprofile
+import clientprofile, agentprofile
+from agentprofile.jwtviews import EmailTokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('agentprofile.urls', namespace='api'))
+    path('api/', include('agentprofile.urls', namespace='api')),
+    
+    path('api/auth/login/', EmailTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/auth/login/refresh/', TokenRefreshView.as_view(), name='token_refresh_pair')
 ]
