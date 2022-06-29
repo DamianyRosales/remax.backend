@@ -3,4 +3,4 @@ from clientprofile.models import ClientProfile
 
 # Register your models here.
 
-#admin.site.register(ClientProfile)
+admin.site.register(ClientProfile)
