@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser, FormParser, MultiPartParser, FileUploadParser
 from rest_framework import permissions, status
 from .models import ClientProfile
+import json
 
 # Create your views here.
 
