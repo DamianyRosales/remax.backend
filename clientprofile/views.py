@@ -63,7 +63,7 @@ class ClientList_view(APIView):
         if serializer.is_valid():
             serializer.save()
             
-            return JsonResponse(data=serializer.datam, status = status.HTTP_201_CREATED)
+            return JsonResponse(data=serializer.data, status = status.HTTP_201_CREATED)
         
         return JsonResponse(data=serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
