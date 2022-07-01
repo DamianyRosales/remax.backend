@@ -5,6 +5,7 @@ from clientprofile import views
 app_name = 'clientprofile'
 
 urlpatterns = [
-    path('clients/', views.ClientList_view.as_view()),
-    path('clients/<int:pk>/', views.ClientDetail_view.as_view()),
+    path('client/', views.ClientList_view.as_view()),
+    path('client/create/', views.Client_view_post.as_view()),
+    path('client/<int:pk>/', views.ClientDetail_view.as_view()),
 ]

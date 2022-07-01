@@ -1,12 +1,11 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from agentprofile.models import UserBase, UserProfileManager
+
+
 # Create your models here.
 
-class ClientProfile(models.Model):
-
-    email = models.EmailField(db_column='email', max_length=255, unique=True, null=True, blank=True)
-    fname = models.CharField(db_column='fname', max_length=30, null=True, blank=True)
-    lname = models.CharField(db_column='lname', max_length= 30, null=True)
+class ClientProfile(UserBase):
 
     homephone = models.CharField(db_column='homephone', max_length=15, blank=True, null=True)
 
@@ -39,10 +38,12 @@ class ClientProfile(models.Model):
         (1, 'Tipo 2'),
     )
 
-    office = models.CharField(max_length=20, choices=OFFICE_CHOICES, default=0)
-    origin = models.CharField(max_length=20, choices=ORIGIN_CHOICES, default=0)
-    agent = models.CharField(max_length=20, choices=AGENT_CHOICES, default=0)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=False)
-    typeof = models.CharField(max_length=20, choices=TYPE_CHOICES, default=0)
+    office = models.IntegerField(max_length=20, choices=OFFICE_CHOICES, default=0)
+    origin = models.IntegerField(max_length=20, choices=ORIGIN_CHOICES, default=0)
+    agent = models.IntegerField(max_length=20, choices=AGENT_CHOICES, default=0)
+    status = models.BooleanField(max_length=20, choices=STATUS_CHOICES, default=False)
+    typeof = models.IntegerField(max_length=20, choices=TYPE_CHOICES, default=0)
 
     notes = models.TextField()
+
+    objects = UserProfileManager()

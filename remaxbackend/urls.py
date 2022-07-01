@@ -22,7 +22,8 @@ from agentprofile.jwtviews import EmailTokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('agentprofile.urls', namespace='api')),
+    path('api/', include('agentprofile.urls', namespace='api-agentprofile')),
+    path('api/', include('clientprofile.urls', namespace='api-clientprofile')),
     
     path('api/auth/login/', EmailTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/login/refresh/', TokenRefreshView.as_view(), name='token_refresh_pair')

@@ -7,9 +7,46 @@ from .models import ClientProfile
 
 # Create your views here.
 
+class Client_view_post(APIView):
+    
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+
+    def put(self, request, pk=None):
+        data = json.loads(json.dumps(request.data))
+
+        for i in models.ClientProfile.objects.all():
+            if i.email == request.data.get('email'):
+                email = i.email
+
+                client = models.ClientProfile.objects.get(email=email)
+
+                serializer = ClientSerializer(client, data=data)
+
+                if serializer.is_valid():
+                    serializer.save()
+
+                    return JsonResponse(data=serializer.data, status=status.HTTP_200_OK)
+
+
+    def post(self, request):
+        data = json.loads(json.dumps(request.data))
+        serializer = ClientSerializer(data=data)
+        if serializer.is_valid():
+            
+            serializer.save()
+            self.put(request)
+
+            return JsonResponse(data=serializer.data, status=status.HTTP_201_CREATED)
+        
+        return JsonResponse(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class ClientList_view(APIView):
 
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
+    
     parser_classes = (JSONParser, FormParser, MultiPartParser, FileUploadParser)
 
     def get(self, request, format = None):
@@ -32,7 +69,7 @@ class ClientList_view(APIView):
 
 
 class ClientDetail_view(APIView):
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.AllowAny]
     parser_classes = (JSONParser, FormParser, MultiPartParser, FileUploadParser)
 
     def get_object(self, pk):
