@@ -17,11 +17,11 @@ class Client_view_post(APIView):
     def put(self, request, pk=None):
         data = json.loads(json.dumps(request.data))
 
-        for i in models.ClientProfile.objects.all():
+        for i in ClientProfile.objects.all():
             if i.email == request.data.get('email'):
                 email = i.email
 
-                client = models.ClientProfile.objects.get(email=email)
+                client = ClientProfile.objects.get(email=email)
 
                 serializer = ClientSerializer(client, data=data)
 
