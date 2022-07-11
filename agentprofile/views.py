@@ -87,6 +87,10 @@ class agent_view(APIView):
         
 class States(APIView):
     
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+    
     def get(self, request):
         mexican_states = ["Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
             "Chiapas", "Chihuahua", "Coahuila de Zaragoza", "Colima", "Ciudad de México",
@@ -94,8 +98,5 @@ class States(APIView):
             "Morelos", "Nayarit", "Nuevo Leon", "Oaxaca", "Puebla", "Queretaro de Arteaga",
             "Quintana Roo", "San Luis Potosi", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas",
             "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatan", "Zacatecas",]
-        permission_classes = [permissions.AllowAny]
-        authentication_classes = []
-        parser_classes = (MultiPartParser, FormParser, JSONParser)
         
-        return JsonResponse(data = json.dumps(mexican_states))
+        return JsonResponse(data = mexican_states, safe=False)
