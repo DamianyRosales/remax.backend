@@ -100,3 +100,13 @@ class States(APIView):
             "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatan", "Zacatecas",]
         
         return JsonResponse(data = mexican_states, safe=False)
+
+class Offices(APIView):
+    
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+    
+    def get(self, request):
+        offices = ['Durango', 'Aguascalientes', 'Quintana Roo'] 
+        return JsonResponse(data = offices, safe=False)
