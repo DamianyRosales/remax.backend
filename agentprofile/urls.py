@@ -6,4 +6,5 @@ app_name = 'agentprofile'
 urlpatterns = [
     path('agent/', views.agent_view.as_view()),
     path('agent/create/', views.agent_view_post.as_view()),
+    path('agent/states/', views.states.as_view()),
 ]

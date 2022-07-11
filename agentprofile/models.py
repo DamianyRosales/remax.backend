@@ -61,3 +61,4 @@ class UserBase(AbstractBaseUser):
 
 class AgentProfile(UserBase):
     objects = UserProfileManager()
+

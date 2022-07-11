@@ -85,3 +85,17 @@ class agent_view(APIView):
                 agent.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
         
+class States(APIView):
+    
+    def get(self, request):
+        mexican_states = ["Aguascalientes", "Baja California", "Baja California Sur", "Campeche",
+            "Chiapas", "Chihuahua", "Coahuila de Zaragoza", "Colima", "Ciudad de México",
+            "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "Estado de Mexico", "Michoacan de Ocampo",
+            "Morelos", "Nayarit", "Nuevo Leon", "Oaxaca", "Puebla", "Queretaro de Arteaga",
+            "Quintana Roo", "San Luis Potosi", "Sinaloa", "Sonora", "Tabasco", "Tamaulipas",
+            "Tlaxcala", "Veracruz de Ignacio de la Llave", "Yucatan", "Zacatecas",]
+        permission_classes = [permissions.AllowAny]
+        authentication_classes = []
+        parser_classes = (MultiPartParser, FormParser, JSONParser)
+        
+        return JsonResponse(data = json.dumps(mexican_states))

@@ -104,3 +104,4 @@ class ClientDetail_view(APIView):
         client.delete()
 
         return JsonResponse(status = status.HTTP_204_NO_CONTENT) 
+
