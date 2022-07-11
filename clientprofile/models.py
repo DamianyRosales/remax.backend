@@ -1,12 +1,11 @@
 from django.db import models
 from django.core.validators import RegexValidator
-from agentprofile.models import UserBase, UserProfileManager
-
 
 # Create your models here.
 
-class ClientProfile(UserBase):
+class ClientProfile(models.Model):
 
+    email = models.EmailField(max_length=255, unique=True,null=True,blank=True)
     homephone = models.CharField(db_column='homephone', max_length=15, blank=True, null=True)
 
     phone_validator = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="")
@@ -46,4 +45,3 @@ class ClientProfile(UserBase):
 
     notes = models.TextField()
 
-    objects = UserProfileManager()
