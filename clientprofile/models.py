@@ -6,6 +6,10 @@ from django.core.validators import RegexValidator
 class ClientProfile(models.Model):
 
     email = models.EmailField(max_length=255, unique=True,null=True,blank=True)
+    
+    fname = models.CharField(max_length=30, null=True,blank=True)
+    lname = models.CharField(max_length=30, null=True,blank=True)
+    
     homephone = models.CharField(db_column='homephone', max_length=15, blank=True, null=True)
 
     phone_validator = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="")
