@@ -27,10 +27,10 @@ class UserProfileManager(BaseUserManager):
 
 class UserBase(AbstractBaseUser):
     id = models.AutoField(primary_key=True)    
-    email = models.EmailField(max_length=255, unique=True,null=True,blank=True)
+    email = models.EmailField(max_length=255, unique=True)
 
-    fname = models.CharField(max_length=30, null=True,blank=True)
-    lname = models.CharField(max_length=30, null=True,blank=True)
+    fname = models.CharField(max_length=30)
+    lname = models.CharField(max_length=30)
     
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

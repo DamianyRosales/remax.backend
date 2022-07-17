@@ -38,22 +38,31 @@ class TokenViewBase(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        email = request.data.get('email')
-        uemail = 'email'
-        for i in models.AgentProfile.objects.all():
-            if i.email == email:
-                uemail = i.email
-                ufull_name = i.fname + i.lname
-                ufname = i.fname
-                ulname = i.lname
+        if not self._serializer_class is api_settings.TOKEN_REFRESH_SERIALIZER:  
+            email = request.data.get('email')
+            uemail = 'email'
+            for i in models.AgentProfile.objects.all():
+                if i.email == email:
+                    uemail = i.email
+                    ufull_name = i.fname + ' ' + i.lname
+                    ufname = i.fname
+                    ulname = i.lname
 
 
-        try:
-            serializer.is_valid(raise_exception=True)
-        except TokenError as e:
-            raise InvalidToken(e.args[0])
+            try:
+                serializer.is_valid(raise_exception=True)
+            except TokenError as e:
+                raise InvalidToken(e.args[0])
          
-        return JsonResponse(data={'data':serializer.validated_data, 'email':uemail, 'fullname':ufull_name, 'fname':ufname, 'lname':ulname}, status=status.HTTP_200_OK)
+            return JsonResponse(data={'token':serializer.validated_data, 'email':uemail, 'fullname':ufull_name, 'fname':ufname, 'lname':ulname}, status=status.HTTP_200_OK)
+        else:
+            try:
+                serializer.is_valid(raise_exception=True)
+            except TokenError as e:
+                raise InvalidToken(e.args[0])
+         
+            return JsonResponse(data={'token':serializer.validated_data}, status=status.HTTP_200_OK)
+
 
 class TokenObtainPairView(TokenViewBase):
     """
