@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'clientOrigin',
     'agentprofile',
     'officesLocations',
+    'properties',
+    'activities',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
