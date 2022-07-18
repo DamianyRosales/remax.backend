@@ -5,16 +5,16 @@ from django.core.validators import RegexValidator
 
 class ClientProfile(models.Model):
 
-    email = models.EmailField(max_length=255, unique=True,null=True,blank=True)
+    email = models.EmailField(max_length=255, unique=True,null=False)
     
-    fname = models.CharField(max_length=30, null=True,blank=True)
-    lname = models.CharField(max_length=30, null=True,blank=True)
+    fname = models.CharField(max_length=30, null=False)
+    lname = models.CharField(max_length=30, null=False)
     
     homephone = models.CharField(db_column='homephone', max_length=15, blank=True, null=True)
 
     phone_validator = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="")
     cellphone = models.CharField(db_column='cellphone',validators=[phone_validator],
-                             max_length=17, blank=True,null=True)
+                             max_length=17, blank=True,null=False)
 
     OFFICE_CHOICES = (
         (0, "RE/MAX México"),
@@ -41,11 +41,11 @@ class ClientProfile(models.Model):
         (1, 'Tipo 2'),
     )
 
-    office = models.IntegerField(max_length=20, choices=OFFICE_CHOICES, default=0)
-    origin = models.IntegerField(max_length=20, choices=ORIGIN_CHOICES, default=0)
-    agent = models.IntegerField(max_length=20, choices=AGENT_CHOICES, default=0)
-    status = models.BooleanField(max_length=20, choices=STATUS_CHOICES, default=False)
-    typeof = models.IntegerField(max_length=20, choices=TYPE_CHOICES, default=0)
+    office = models.IntegerField(choices=OFFICE_CHOICES, default=0, null=False)
+    origin = models.IntegerField(choices=ORIGIN_CHOICES, default=0, null=False)
+    agent = models.IntegerField(choices=AGENT_CHOICES, default=0, null=False)
+    status = models.BooleanField(choices=STATUS_CHOICES, default=False, null=False)
+    typeof = models.IntegerField(choices=TYPE_CHOICES, default=0, null=False)
 
     notes = models.TextField()
 

@@ -54,7 +54,7 @@ class ClientList_view(APIView):
         clients = ClientProfile.objects.all()
         serializer = ClientSerializer(clients, many = True)
 
-        return JsonResponse(data=serializer.data, safe = False)
+        return JsonResponse(data={'data':serializer.data, 'data2': ClientProfile.OFFICE_CHOICES[serializer.data[0]['office']][1]}, safe = False)
 
 
     def post(self, request, format = None):
