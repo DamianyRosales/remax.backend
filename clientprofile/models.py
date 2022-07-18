@@ -1,5 +1,8 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from officesLocations.models import Office
+from agentprofile.models import AgentProfile
+from clientOrigin.models import ClientOrigin
 
 # Create your models here.
 
@@ -16,21 +19,6 @@ class ClientProfile(models.Model):
     cellphone = models.CharField(db_column='cellphone',validators=[phone_validator],
                              max_length=17, blank=True,null=False)
 
-    OFFICE_CHOICES = (
-        (0, "RE/MAX México"),
-    )
-
-    ORIGIN_CHOICES = (
-        (0, 'SIR || Tarjeta Digital'),
-    )
-
-    AGENT_CHOICES = (
-        (0, 'Dinorah Felgueres Hernández'),
-        (1, 'Eduardo Cruz García'),
-        (2, 'Felipe Gonzalez Rosales'),
-        (3, 'Salvador Haro Cisneros'),
-    )
-
     STATUS_CHOICES = (
         (True, 'Activo'),
         (False, 'Inactivo'),
@@ -41,9 +29,9 @@ class ClientProfile(models.Model):
         (1, 'Tipo 2'),
     )
 
-    office = models.IntegerField(choices=OFFICE_CHOICES, default=0, null=False)
-    origin = models.IntegerField(choices=ORIGIN_CHOICES, default=0, null=False)
-    agent = models.IntegerField(choices=AGENT_CHOICES, default=0, null=False)
+    office = models.ForeignKey(Office, on_delete=models.CASCADE)
+    origin = models.ForeignKey(ClientOrigin, on_delete=models.CASCADE)
+    agent = models.ForeignKey(AgentProfile, on_delete=models.CASCADE)
     status = models.BooleanField(choices=STATUS_CHOICES, default=False, null=False)
     typeof = models.IntegerField(choices=TYPE_CHOICES, default=0, null=False)
 

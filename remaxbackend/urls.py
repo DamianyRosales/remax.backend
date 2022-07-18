@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/', include('agentprofile.urls', namespace='api-agentprofile')),
     path('api/', include('clientprofile.urls', namespace='api-clientprofile')),
     path('api/', include('officesLocations.urls', namespace='api-officesLocations')),
+    path('api/', include('clientOrigin.urls', namespace='api-clientOrigin')),
     
     path('api/auth/login/', EmailTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/login/refresh/', TokenRefreshView.as_view(), name='token_refresh_pair')
