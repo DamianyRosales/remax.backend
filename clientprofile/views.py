@@ -103,5 +103,5 @@ class ClientDetail_view(APIView):
         client = self.get_object(pk = pk)
         client.delete()
 
-        return JsonResponse(status = status.HTTP_204_NO_CONTENT) 
+        return JsonResponse(data={}, status = status.HTTP_204_NO_CONTENT) 
 
