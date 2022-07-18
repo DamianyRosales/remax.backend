@@ -16,7 +16,7 @@ class OfficeListView(APIView):
     def get(self, request, format=None):
         offices = Office.objects.all()
         serializer = OfficeSerializer(offices, many=True)
-        return JsonResponse(data=serializer.data, status=status.HTTP_200_OK)
+        return JsonResponse(data=serializer.data, status=status.HTTP_200_OK, safe=False)
 
     def post(self, request, format=None):
         serializer = OfficeSerializer(data=request.data)
