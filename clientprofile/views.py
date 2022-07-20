@@ -101,8 +101,8 @@ class ClientDetail_view(APIView):
 
     def delete(self, request, pk, format = None):
         client = self.get_object(pk = pk)
-        data = client
+        serializer = ClientSerializer(client)
         client.delete()
 
-        return JsonResponse(data=client, status = status.HTTP_204_NO_CONTENT) 
+        return JsonResponse(data=serializer.data, status = status.HTTP_204_NO_CONTENT, safe=False) 
 
