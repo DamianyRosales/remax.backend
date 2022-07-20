@@ -103,6 +103,8 @@ class ClientDetail_view(APIView):
         client = self.get_object(pk = pk)
         serializer = ClientSerializer(client)
         client.delete()
+        sd = serializer.data
+        sd['id'] = pk
 
-        return JsonResponse(data=serializer.data, safe=False) 
+        return JsonResponse(data=sd, safe=False) 
 
