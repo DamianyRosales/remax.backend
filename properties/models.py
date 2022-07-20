@@ -1,4 +1,3 @@
-from typing_extensions import LiteralString
 from django.db import models
 from django.utils.translation import lazy_number
 from officesLocations.models import Office
