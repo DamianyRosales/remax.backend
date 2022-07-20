@@ -104,5 +104,5 @@ class ClientDetail_view(APIView):
         serializer = ClientSerializer(client)
         client.delete()
 
-        return JsonResponse(data=serializer.data, status = status.HTTP_204_NO_CONTENT, safe=False) 
+        return JsonResponse(data=serializer.data, safe=False) 
 
