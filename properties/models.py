@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import lazy_number
 from officesLocations.models import Office
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -16,6 +17,14 @@ class Propertie(models.Model):
     
     lt = models.CharField(max_length=255, null=False)
     ln = models.CharField(max_length=255, null=False)
+
+    description = models.TextField()
+    typeOfService = models.CharField(max_length=255, null=False)
+    areas = models.CharField(max_length=255)
+
+    images = CloudinaryField('images')
+    
+    
     
     
     def __str__(self):
