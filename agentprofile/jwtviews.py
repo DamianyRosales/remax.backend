@@ -43,6 +43,7 @@ class TokenViewBase(generics.GenericAPIView):
             uemail = 'email'
             for i in models.AgentProfile.objects.all():
                 if i.email == email:
+                    id = i.id
                     uemail = i.email
                     ufull_name = i.fname + ' ' + i.lname
                     ufname = i.fname
@@ -54,7 +55,7 @@ class TokenViewBase(generics.GenericAPIView):
             except TokenError as e:
                 raise InvalidToken(e.args[0])
          
-            return JsonResponse(data={'token':serializer.validated_data, 'email':uemail, 'fullname':ufull_name, 'fname':ufname, 'lname':ulname}, status=status.HTTP_200_OK)
+            return JsonResponse(data={'token':serializer.validated_data, 'id':id, 'email':uemail, 'fullname':ufull_name, 'fname':ufname, 'lname':ulname}, status=status.HTTP_200_OK)
         else:
             try:
                 serializer.is_valid(raise_exception=True)
