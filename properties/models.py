@@ -15,8 +15,8 @@ class Propertie(models.Model):
     price = models.IntegerField(null=False)
     size = models.CharField(max_length=255, null=False)
     office = models.ForeignKey(Office, on_delete=models.CASCADE)
-    bedrooms = models.IntegerField(null=False)
-    bathrooms = models.IntegerField(null=False)
+    bedrooms = models.FloatField(null=False)
+    bathrooms = models.FloatField(null=False)
     parking_lots = models.IntegerField(null=False)
  
     lt = models.CharField(max_length=255, null=False)

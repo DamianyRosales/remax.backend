@@ -54,6 +54,11 @@ class PropertieListView(APIView):
         areas = request.data['areas']
         images = dict((request.data).lists())['images']
         arr = []
+        preserializer = PropertieSerializer(data=request.data)
+
+        if not preserializer.is_valid():
+            return JsonResponse(data=preserializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+
         for i in images:
             
             propertie_id = Propertie.objects.latest('id').id+1 if Propertie.objects.exists() else 1
