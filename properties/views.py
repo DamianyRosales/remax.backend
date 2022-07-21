@@ -49,7 +49,7 @@ class PropertieListView(APIView):
         parking_lots = request.data['parking_lots']
         lt = request.data['lt']
         ln = request.data['ln']
-        description = request.data['address']
+        description = request.data['description']
         typeOfService = request.data['typeOfService']
         areas = request.data['areas']
         images = dict((request.data).lists())['images']
