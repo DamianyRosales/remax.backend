@@ -1,11 +1,15 @@
 from django.db import models
 from django.utils.translation import lazy_number
 from officesLocations.models import Office
-from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
+class Image(models.Model):
+    propertie_id = models.IntegerField()
+    image = models.ImageField(upload_to='REMAXimages/')
+
 class Propertie(models.Model):
+    id = models.AutoField(primary_key=True, db_column='id')
     address = models.CharField(max_length=255, null=False)
     type = models.CharField(max_length=255, null=False)
     price = models.IntegerField(null=False)
@@ -14,7 +18,7 @@ class Propertie(models.Model):
     bedrooms = models.IntegerField(null=False)
     bathrooms = models.IntegerField(null=False)
     parking_lots = models.IntegerField(null=False)
-    
+ 
     lt = models.CharField(max_length=255, null=False)
     ln = models.CharField(max_length=255, null=False)
 
@@ -22,10 +26,9 @@ class Propertie(models.Model):
     typeOfService = models.CharField(max_length=255, null=False)
     areas = models.CharField(max_length=255)
 
-    images = CloudinaryField('images')
-    
-    
-    
-    
+    images = models.ImageField(upload_to='REMAXimages/', null=True, blank=True)
+
+    #images = models.ManyToManyField(Image, null=True)
     def __str__(self):
         return self.address
+

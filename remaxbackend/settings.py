@@ -12,10 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
-import cloudinary
-import cloudinary.uploader, cloudinary.api
 
-cloudinary.config(cloud_name='dh7dxkfwe', api_secret='VJvp0gOOO2qB-zObuhvmJZthFFk', api_key='246181219316647')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
 
     'corsheaders',
     'rest_framework',
@@ -52,6 +48,10 @@ INSTALLED_APPS = [
     'officesLocations',
     'properties',
     'activities',
+
+    'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -204,3 +204,11 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dh7dxkfwe',
+    'API_KEY': '246181219316647',
+    'API_SECRET': 'VJvp0gOOO2qB-zObuhvmJZthFFk'
+}
+
+MEDIA_URL = '/media/'  # or any prefix you choose
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
