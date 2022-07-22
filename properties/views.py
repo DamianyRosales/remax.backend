@@ -23,12 +23,12 @@ class PropertieFilterListView(APIView):
         address = request.data['address'] if 'address' in request.data else ''
         typeP = request.data['type'] if 'type' in request.data else ''
         priceGTE = int(request.data['priceGTE']) if 'priceGTE' in request.data else 0
-        priceLTE = int(request.data['priceLTE']) if 'priceLTE' in request.data else 2**64 
+        priceLTE = int(request.data['priceLTE']) if 'priceLTE' in request.data else 100000000
         sizeGTE = int(request.data['sizeGTE']) if 'sizeGTE' in request.data else 0
-        sizeLTE = int(request.data['sizeLTE']) if 'sizeLTE' in request.data else 2**64
-        bedrooms = float(request.data['bedrooms']) if 'bedrooms' in request.data else 2**64 
-        bathrooms = float(request.data['bathrooms']) if 'bathrooms' in request.data else 2**64 
-        parking_lots = int(request.data['parking_lots']) if 'parking_lots' in request.data else 2**64
+        sizeLTE = int(request.data['sizeLTE']) if 'sizeLTE' in request.data else 100000000
+        bedrooms = float(request.data['bedrooms']) if 'bedrooms' in request.data else 100000000
+        bathrooms = float(request.data['bathrooms']) if 'bathrooms' in request.data else 100000000
+        parking_lots = int(request.data['parking_lots']) if 'parking_lots' in request.data else 100000000
 
         #address = self.kwargs['address']
         #typeP = self.kwargs['type']
