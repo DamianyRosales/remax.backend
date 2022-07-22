@@ -105,6 +105,7 @@ class PropertieListView(APIView):
         typeOfService = request.data['typeOfService']
         areas = request.data['areas']
         images = dict((request.data).lists())['images']
+        link = request.data['link']
         arr = []
         preserializer = PropertieSerializer(data=request.data)
 
@@ -123,7 +124,7 @@ class PropertieListView(APIView):
 
         modified_data = modify_input_for_multiple_files(address, type, 
         price, size, office, bedrooms, bathrooms, parking_lots, lt, ln, 
-        description, typeOfService, areas, images)
+        description, typeOfService, areas, images, link)
         file_serializer = PropertieSerializer(data=modified_data)
         
         if file_serializer.is_valid():

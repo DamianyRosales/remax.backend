@@ -1,4 +1,4 @@
-def modify_input_for_multiple_files(address, type, price, size, office, bedrooms, bathrooms, parking_lots, lt, ln, description, typeOfService, areas,  image):
+def modify_input_for_multiple_files(address, type, price, size, office, bedrooms, bathrooms, parking_lots, lt, ln, description, typeOfService, areas,  image, link):
     dict = {}
     dict['address'] = address
     dict['type'] = type
@@ -14,6 +14,7 @@ def modify_input_for_multiple_files(address, type, price, size, office, bedrooms
     dict['typeOfService'] = typeOfService
     dict['areas'] = areas
     dict['image'] = image
+    dict['link'] = link
     
 
     return dict

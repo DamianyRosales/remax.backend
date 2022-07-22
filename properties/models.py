@@ -28,6 +28,8 @@ class Propertie(models.Model):
 
     images = models.ImageField(upload_to='REMAXimages/', null=True, blank=True)
 
+    link = models.TextField()
+
     #images = models.ManyToManyField(Image, null=True)
     def __str__(self):
         return self.address
