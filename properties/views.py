@@ -18,17 +18,28 @@ class PropertieFilterListView(APIView):
     authentication_classes = []
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
-    def get(self, request, format=None):
-        address = request.data['address']
-        typeP = request.data['type']
-        priceGTE = int(request.data['priceGTE'])
-        priceLTE = int(request.data['priceLTE'])
-        sizeGTE = int(request.data['sizeGTE'])
-        sizeLTE = int(request.data['sizeLTE'])
-        bedrooms = int(request.data['bedrooms'])
-        bathrooms = int(request.data['bathrooms'])
-        parking_lots = int(request.data['parking_lots'])
-        
+    def post(self, request, **kwars):
+
+        address = request.data['address'] if 'address' in request.data else ''
+        typeP = request.data['type'] if 'type' in request.data else ''
+        priceGTE = int(request.data['priceGTE']) if 'priceGTE' in request.data else 0
+        priceLTE = int(request.data['priceLTE']) if 'priceLTE' in request.data else 2**64 
+        sizeGTE = int(request.data['sizeGTE']) if 'sizeGTE' in request.data else 0
+        sizeLTE = int(request.data['sizeLTE']) if 'sizeLTE' in request.data else 2**64
+        bedrooms = float(request.data['bedrooms']) if 'bedrooms' in request.data else 2**64 
+        bathrooms = float(request.data['bathrooms']) if 'bathrooms' in request.data else 2**64 
+        parking_lots = int(request.data['parking_lots']) if 'parking_lots' in request.data else 2**64
+
+        #address = self.kwargs['address']
+        #typeP = self.kwargs['type']
+        #priceGTE = int(self.kwargs['priceGTE'])
+        #priceLTE = int(self.kwargs['priceLTE'])
+        #sizeGTE = int(self.kwargs['sizeGTE'])
+        #sizeLTE = int(self.kwargs['sizeLTE'])
+        #bedrooms = float(self.kwargs['bedrooms'])
+        #bathrooms = float(self.kwargs['bathrooms'])
+        #parking_lots = int(self.kwargs['parking_lots'])
+
         properties = Propertie.objects.filter(size__gte=sizeGTE, size__lte=sizeLTE, 
                         price__gte=priceGTE, price__lte=priceLTE, bedrooms__lte=bedrooms,
                         parking_lots__lte=parking_lots, bathrooms__lte=bathrooms,

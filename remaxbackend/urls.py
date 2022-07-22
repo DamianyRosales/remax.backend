@@ -15,10 +15,11 @@ Including another URLconf
 """
 from http import client
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 import clientprofile, agentprofile
 from agentprofile.jwtviews import EmailTokenObtainPairView, TokenRefreshView
+from properties import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +30,7 @@ urlpatterns = [
     path('api/', include('properties.urls', namespace='api-properties')),
     
     path('api/auth/login/', EmailTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/auth/login/refresh/', TokenRefreshView.as_view(), name='token_refresh_pair')
+    path('api/auth/login/refresh/', TokenRefreshView.as_view(), name='token_refresh_pair'),
+    
+    #re_path(r'^api/properties/filter/(?P<address>[0-9a-f-]+)$', views.PropertieFilterListView.as_view(), name='filter')
 ]
