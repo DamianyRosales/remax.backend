@@ -6,4 +6,5 @@ app_name = 'officesLocations'
 
 urlpatterns = [
     path('properties/', views.PropertieListView.as_view()),
+    path('properties/filter/', views.PropertieFilterListView.as_view()),
 ]

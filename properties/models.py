@@ -13,7 +13,7 @@ class Propertie(models.Model):
     address = models.CharField(max_length=255, null=False)
     type = models.CharField(max_length=255, null=False)
     price = models.IntegerField(null=False)
-    size = models.CharField(max_length=255, null=False)
+    size = models.IntegerField(null=False)
     office = models.ForeignKey(Office, on_delete=models.CASCADE)
     bedrooms = models.FloatField(null=False)
     bathrooms = models.FloatField(null=False)

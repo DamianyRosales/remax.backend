@@ -6,8 +6,49 @@ from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser, FormParser, MultiPartParser, FileUploadParser
 from rest_framework import permissions, status
 from .models import Propertie, Image
+import operator
+from django.db.models import Q
+from functools import reduce
 
 # Create your views here.
+
+class PropertieFilterListView(APIView):
+
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+
+    def get(self, request, format=None):
+        address = request.data['address']
+        typeP = request.data['type']
+        priceGTE = int(request.data['priceGTE'])
+        priceLTE = int(request.data['priceLTE'])
+        sizeGTE = int(request.data['sizeGTE'])
+        sizeLTE = int(request.data['sizeLTE'])
+        bedrooms = int(request.data['bedrooms'])
+        bathrooms = int(request.data['bathrooms'])
+        parking_lots = int(request.data['parking_lots'])
+        
+        properties = Propertie.objects.filter(size__gte=sizeGTE, size__lte=sizeLTE, 
+                        price__gte=priceGTE, price__lte=priceLTE, bedrooms__lte=bedrooms,
+                        parking_lots__lte=parking_lots, bathrooms__lte=bathrooms,
+                        address__icontains=address, type__icontains=typeP)
+        #properties = Propertie.objects.filter(size__gte=sizeGTE, size__lte=sizeLTE)
+
+        print(properties)
+
+        images = Image.objects.all()
+        data = {}
+        for i in properties:
+            limages = []
+            for j in images:
+                if j.propertie_id == i.id:
+                    n = PropertieSerializer(i)
+                    n1 = ImageSerializer(j)
+                    limages.append(n1.data)
+                    data[n.data['id']] = {'data': n.data, "images": limages}
+        return JsonResponse(data=data, status=status.HTTP_200_OK, safe=False)
+
 
 class PropertieListView(APIView):
 
